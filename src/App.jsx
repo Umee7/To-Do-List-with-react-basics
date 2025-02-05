@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react'
 import { v4 as UUID } from 'uuid'
 import './App.css'
+import img1 from './assets/img1.jpg'
+import img2 from './assets/img2.jpg'
+import img3 from './assets/img3.jpg'
+import img4 from './assets/img4.jpg'
+import img5 from './assets/img5.jpg'
+import ImageSlider from './ImageSlider'
 
 function App() {
 
@@ -8,6 +14,8 @@ function App() {
   const[todoList, setTodoList] = useState([]);
   const[completedTodo, setCompletedTodo] = useState([]);
   const[completedCount, setCompletedCount] = useState(0);
+  const IMAGES = [img1 , img2, img3, img4, img5];
+
 
 
   useEffect(()=>{
@@ -63,6 +71,17 @@ function App() {
 
   return (
     <>
+      <div style={{
+          maxWidth: "1200px",
+          width: "100%",
+          aspectRatio: "10 / 3",
+          margin: "0 auto",
+          overflow: "hidden",
+          borderRadius: "12px",
+        }}>
+        <ImageSlider images={IMAGES} />
+      </div>
+        
       <h1>Todo List</h1>
       <input type='text' value={todo} placeholder='Enter a todo...' onChange={(e)=>setTodo(e.target.value)}/>
       <button onClick={addTodo}>+</button>
@@ -94,6 +113,7 @@ function App() {
 
       </ul>
         
+      
       
     </>
   )

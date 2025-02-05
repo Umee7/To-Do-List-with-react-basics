@@ -1,42 +1,156 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* General Body Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: 40px;
+}
+
+/* Main Container */
+h1 {
+  font-size: 2.5rem;
   text-align: center;
+  color: #444;
+  margin-bottom: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Todo Input Section */
+input[type="text"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 700px;
+  margin-right: 10px;
+  outline: none;
+  transition: border 0.3s;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+input[type="text"]:focus {
+  border-color: #007bff;
 }
 
-.card {
-  padding: 2em;
+/* Styling for Add and Clear buttons */
+button {
+  background-color: #646cff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  margin: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
 }
 
-.read-the-docs {
-  color: #888;
+button:hover {
+  background-color: #5050ff;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:focus {
+  outline: none;
+}
+
+
+.clear-btn {
+  margin-top: 20px;
+  background-color: #dc3545;
+}
+
+.clear-btn:hover {
+  background-color: #c82333;
+}
+
+/* Todo List Styles */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+  width: 100%;
+  max-width: 90vw;
+}
+
+li {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+li.completed {
+  background-color: #f0f0f0;
+  animation: fadeOut 0.6s ease forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; max-height: 60px; }
+  100% { opacity: 0; max-height: 0; margin: 0; padding: 0; }
+}
+
+/* Task Name with Line-Through */
+li span.task-name {
+  text-decoration: none;
+  flex-grow: 1;
+  word-break: break-word;
+  max-width: 80%;
+  transition: color 0.3s ease;
+}
+
+li.completed span.task-name {
+  text-decoration: line-through;
+  color: #999;
+}
+
+/* Handle Button Size and Hover Effects */
+li button {
+  background-color: #28a745;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+  min-width: 70px;
+  text-decoration: none;
+}
+
+li button:hover {
+  background-color: #218838;
+}
+
+/* Overall Transitions */
+li, input[type="text"], button {
+  transition: all 0.3s ease;
+}
+
+/* Completed List Section */
+h3 {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 20px;
 }
