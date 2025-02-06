@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { v4 as UUID } from 'uuid'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './App.css'
@@ -8,6 +8,9 @@ import img3 from './assets/img3.jpg'
 import img4 from './assets/img4.jpg'
 import img5 from './assets/img5.jpg'
 import ImageSlider from './ImageSlider'
+import InputTodo from './components/InputTodo'
+import Todos from './components/Todos'
+import CompletedTodos from './components/CompletedTodos'
 
 const client = new QueryClient({});
 
@@ -19,12 +22,6 @@ function App() {
   const[completedCount, setCompletedCount] = useState(0);
   const IMAGES = [img1 , img2, img3, img4, img5];
 
-
-
-  useEffect(()=>{
-    console.log(completedTodo);
-  },[completedTodo])
-
   const addTodo = () => {
     if(todo.length === 0 ) return;
     const todos = {
@@ -32,15 +29,12 @@ function App() {
       title: todo, 
       completed: false,
     }
-
     setTodoList((prev) => [...prev, todos]);
     setTodo("");
     setCompletedCount((prev) => prev + 1)
-
   }
 
   const deleteTask = (id, title) => {
-
     setTodoList(todoList.filter((todo) => todo.id !== id));
     setCompletedCount(completedTodo.length+1);
     
@@ -63,7 +57,6 @@ function App() {
   }
 
   const deleteCompleted = (id) => {
-
     setCompletedTodo(completedTodo.filter((todo) => todo.id !== id));
     setCompletedCount((prev) => {
       if(completedCount === 0){
@@ -85,39 +78,15 @@ function App() {
         }}>
         <ImageSlider images={IMAGES} />
       </div>
-        
-      <h1>Todo List</h1>
-      <input type='text' value={todo} placeholder='Enter a todo...' onChange={(e)=>setTodo(e.target.value)}/>
-      <button onClick={addTodo}>+</button>
-      <button onClick={clearTasks}>clear</button>
-
+      <InputTodo  setTodo={setTodo} addTodo={addTodo} clearTasks={clearTasks} todo={todo} />
       <ul>
-        
-        {todoList.map((todo, key=todo.id) => {
-          return (
-            <li key={key}>
-              {todo.title}
-              <button onClick={()=>deleteTask(todo.id, todo.title)}>Completed</button>
-            </li>
-          )
-        })}
+        <Todos todoList={todoList} deleteTask={deleteTask} />
       </ul>
       <ul>
-        {( completedTodo.length !== 0 ) && <h3>{completedCount} completed</h3> }
-      
-        {completedTodo.length === 0 && todoList.length  === 0 ? "No Tasks left to do" : completedTodo.map((todo) => {
-          return (
-            // eslint-disable-next-line react/jsx-key
-            <li style={{textDecoration: "line-through"}}>
-               {todo.title} 
-              <button onClick={()=>deleteCompleted(todo.id)}>Delete</button>
-            </li>
-          )
-        })}
-
-      </ul>
-        
-      
+        {( completedTodo.length !== 0 ) && <h3>{completedCount} completed</h3> }      
+        {completedTodo.length === 0 && todoList.length  === 0 ? 
+          "No Tasks left to do" : < CompletedTodos completedTodo={completedTodo} deleteCompleted={deleteCompleted}/>}  
+      </ul>             
       </QueryClientProvider>  
     </>
   )
