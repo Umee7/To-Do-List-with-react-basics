@@ -17,6 +17,7 @@ const client = new QueryClient({});
 function App() {
 
   const[todo, setTodo] = useState("");
+  const[newTodo, setNewTodo] = useState("");
   const[todoList, setTodoList] = useState([]);
   const[completedTodo, setCompletedTodo] = useState([]);
   const[completedCount, setCompletedCount] = useState(0);
@@ -28,11 +29,39 @@ function App() {
       id: UUID(),
       title: todo, 
       completed: false,
+      edit: false,
     }
     setTodoList((prev) => [...prev, todos]);
     setTodo("");
     setCompletedCount((prev) => prev + 1)
   }
+
+  const toggleTodo = (id) => {
+    setTodoList(todoList.map((todo)=> {
+      if(todo.id === id ){
+        return{...todo, edit: !todo.edit};
+      } else return todo;
+    }))    
+  }
+  
+  const saveTodo = (id) => {
+      if(newTodo.length === 0 ) {
+        setTodoList(todoList.map((todo)=> {
+          if(todo.id === id ){
+            return{...todo, edit: !todo.edit};
+          } else return todo;
+        }))
+      }
+      if(newTodo.length !== 0 ) {
+        setTodoList(todoList.map((todo)=> {
+        if(todo.id === id ){
+          return {...todo, title: newTodo, edit: !todo.edit }
+        } else return todo;
+      }))
+      setNewTodo("");
+    }  
+  }
+
 
   const deleteTask = (id, title) => {
     setTodoList(todoList.filter((todo) => todo.id !== id));
@@ -80,7 +109,8 @@ function App() {
       </div>
       <InputTodo  setTodo={setTodo} addTodo={addTodo} clearTasks={clearTasks} todo={todo} />
       <ul>
-        <Todos todoList={todoList} deleteTask={deleteTask} />
+        <Todos todoList={todoList} deleteTask={deleteTask}
+         newTodo={newTodo} setNewTodo={setNewTodo} saveTodo={saveTodo} toggleTodo={toggleTodo} />
       </ul>
       <ul>
         {( completedTodo.length !== 0 ) && <h3>{completedCount} completed</h3> }      
