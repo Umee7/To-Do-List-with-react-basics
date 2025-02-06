@@ -8,8 +8,8 @@ export default function CompletedTodos({completedTodo, deleteCompleted}) {
       {completedTodo.map((todo) => {
           return (
             // eslint-disable-next-line react/jsx-key
-            <li>
-               <span style={{textDecoration:"line-through"}}>{todo.title} </span>
+            <li style={{backgroundColor: "#52be80 "}}>
+               <span style={{textDecoration:"line-through", color: "#fff"}}>{todo.title} </span>
               <button className="clear-btn" onClick={()=>deleteCompleted(todo.id)}>Delete</button>
             </li>
           )

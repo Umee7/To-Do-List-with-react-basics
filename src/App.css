@@ -21,7 +21,7 @@ h1 {
 }
 
 /* Todo Input Section */
-input[type="text"] {
+input[type="text"], .inpt {
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #ddd;
@@ -32,6 +32,11 @@ input[type="text"] {
   outline: none;
   transition: border 0.3s;
 }
+
+.inpt {
+  border: 1px solid #ddd;
+}
+
 
 input[type="text"]:focus {
   border-color: #007bff;
@@ -95,6 +100,10 @@ li {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   animation: fadeIn 0.4s ease;
+}
+
+li:hover {
+  background-color: #f8f9f9;
 }
 
 @keyframes fadeIn {

@@ -61,8 +61,8 @@ function App() {
       setNewTodo("");
     }  
   }
-
-
+  
+  
   const deleteTask = (id, title) => {
     setTodoList(todoList.filter((todo) => todo.id !== id));
     setCompletedCount(completedTodo.length+1);
@@ -70,6 +70,7 @@ function App() {
     const completedTask = {
       id: id,
       title: title,
+      completed: true,
     }
 
     todoList.map((todo)=>{
@@ -123,3 +124,6 @@ function App() {
 }
 
 export default App
+
+
+// Somehow Ended up making this To-Do List. Although it is nowhere near perfect, I still think it's a good starting point to my react journey. All the best to myself 🥂✨
